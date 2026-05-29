@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Just One Question 💖</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family:"Segoe UI",sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url("us.jpg") no-repeat center/cover;
+  background-size: cover;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,0.3);
+  z-index:0;
+}
+.card{
+  position:relative;
+  z-index:1;
+}
+
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 20px 45px rgba(0,0,0,.35);
+  text-align:center;
+  max-width:420px;
+  position:relative;
+  z-index:2;
+}
+
+h1{color:#7a6e35}
+p{font-size:18px;color:#444}
+
+button{
+  padding:12px 30px;
+  border-radius:30px;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+  transition:transform .2s;
+}
+button:hover{transform:scale(1.05)}
+
+#yesBtn{background:#9cb65f;color:white}
+
+#noBtn{
+  position:fixed;
+  background:#969168;
+  z-index:10;
+}
+
+.hidden{display:none}
+
+.message{
+  font-size:22px;
+  font-weight:bold;
+  color:#e91e63;
+  margin-top:20px;
+}
+
+.float{
+  position:fixed;
+  top:-40px;
+  animation:fall linear forwards;
+  pointer-events:none;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+
+.balloon{
+  position:fixed;
+  bottom:-80px;
+  animation:rise 3s ease-out forwards;
+  font-size:40px;
+}
+@keyframes rise{
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+#prank{
+  font-size:26px;
+  font-weight:bold;
+  color:#e91e63;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  romantic.mp3
+</audio>
+
+<div class="card">
+  <div style="font-size:50px">😍</div>
+
+  <h1>Lets go to groove babe on the 5th Please!!!?</h1>
+  <p>you need to refresh your mind 💖</p>
+
+  <button id="yesBtn">YES 💕</button>
+
+  <div id="firstMessage" class="message hidden">
+    I knew you wouldnt disappoint me 😍<br><br>
+  </div>
+
+
+</div>
+
+<button id="noBtn">NO !!!</button>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const firstMessage = document.getElementById("firstMessage");
+const dateStage = document.getElementById("dateStage");
+const prank = document.getElementById("prank");
+const dateYes = document.getElementById("dateYes");
+const closePrank = document.getElementById("closePrank");
+const music = document.getElementById("music");
+
+noBtn.style.left="60%";
+noBtn.style.top="65%";
+
+noBtn.onmouseover=()=>{
+  noBtn.style.left=Math.random()*(innerWidth-120)+"px";
+  noBtn.style.top=Math.random()*(innerHeight-60)+"px";
+};
+
+function fall(symbol){
+  const e=document.createElement("div");
+  e.className="float";
+  e.textContent=symbol;
+  e.style.left=Math.random()*100+"vw";
+  e.style.fontSize=24+Math.random()*20+"px";
+  e.style.animationDuration=3+Math.random()*3+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),6000);
+}
+
+function balloon(){
+  const b=document.createElement("div");
+  b.className="balloon";
+  b.textContent="🎈";
+  b.style.left=Math.random()*100+"vw";
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),3000);
+}
+
+yesBtn.onclick=()=>{
+  yesBtn.remove();
+  noBtn.remove();
+  music.play();
+
+  firstMessage.classList.remove("hidden");
+
+  for(let i=0;i<15;i++) setTimeout(balloon,i*200);
+  setInterval(()=>fall("🌹"),300);
+  setInterval(()=>fall("💍"),500);
+
+  setTimeout(()=>{
+    dateStage.classList.remove("hidden");
+  },4000);
+};
+
+dateYes.onclick=()=>{
+  dateStage.remove();
+  firstMessage.remove();
+  prank.classList.remove("hidden");
+};
+
+closePrank.onclick=()=>{
+  closePrank.remove();
+};
+// Start showers on page load
+setInterval(() => fall("💖"), 300);
+setInterval(() => fall("✨"), 500);
+setInterval(() => fall("🌸"), 700);
+</script>
+
+</body>
+</html>
